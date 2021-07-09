@@ -44,7 +44,6 @@ public class P67258 {
             }
         }
         System.out.println(uniqueGems);
-        //uniqueGems 배열 맨 앞 string index 중 제일 이른 숫자
         //uniqueGems 배열 맨 뒤 string index 숫자
         for (int i=1;i<=gemsCount; i++){
             gemsBox.put(gems[i-1], i);

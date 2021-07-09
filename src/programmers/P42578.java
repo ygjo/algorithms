@@ -1,86 +1,41 @@
 package programmers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static jdk.nashorn.internal.objects.Global.print;
-
 //위장 https://programmers.co.kr/learn/courses/30/lessons/42578
 public class P42578 {
-
+    /*  1. (headgear의 수 + 1) 1을 더 해주는 이유는 headgear를 착용하지 않을 수도 있기 때문입니다.
+        2. (eyewear의 수 + 1 ) 1을 더 해주는 이유는 eyewear를 착용하지 않을 수도 있기 때문입니다.
+        3. 두 수는 각각 독립적이기 때문에 1번 2번의 수를 곱하고 - 1 (모두 안입는 경우는 존재하지 않으므로)*/
     public static void main(String[] args) {
      String[][] testCase1 = {{"yellow_hat", "headgear"},{"blue_sunglasses", "eyewear"},{"green_turban", "headgear"}};
      String[][] testCase2 = {{"crow_mask", "face"},{"blue_sunglasses", "face"},{"smoky_makeup", "face"}};
      String[][] testCase3 = {{"crow_mask", "face"},{"blue_sunglasses", "face"},{"smoky_makeup", "face"},{"yellow_hat", "headgear"},{"blue_sunglasses", "eyewear"},{"green_turban", "headgear"}};
 
-     solution(testCase3);
+     solution(testCase1);
     }
     public static int solution(String[][] clothes) {
-
-        int answer = 0;
+        int answer = 1;
         int testCaseLength = clothes.length;
-        Map<String,ArrayList<String>> categorizedClothes = new HashMap<>();
-        String[] items = new String[testCaseLength];
-        boolean[] visited = new boolean[testCaseLength];
 
+        Map<String, Integer> clothesMap = new HashMap<>(); // 종류 : 갯수
 
-        for (int i =0; i < testCaseLength;i++){
-            //아이템 전체 목
-            items[i] = clothes[i][0];
-
-           // 카테고리 별로 아이템 저장
-          ArrayList<String> current = categorizedClothes.get(clothes[i][1]);
-           if (current == null){
-               current= new ArrayList<>();
-               categorizedClothes.put(clothes[i][1],current);
-           }
-           current.add(clothes[i][0]);
-
-       }
-
-        System.out.println(categorizedClothes);
-
-        for (int j = 1; j <= testCaseLength; j++) {
-            System.out.println("\n" + testCaseLength + " 개 중에서 " + j + " 개 뽑기");
-            comb(items, visited, 0, testCaseLength, j);
+        for (int i = 0; i < testCaseLength; i++) {
+            // 종류 여부 판단. 같은 종류 일 경우 Value + 1
+            clothesMap.put(clothes[i][1], clothesMap.getOrDefault(clothes[i][1], 0)+1);
         }
 
-        if(categorizedClothes.size() == 1){ // 카테고리 다 같을 경우
-            answer = testCaseLength;
-        }else{
-            //2개 이상 조합해서 착용 == nCr
-            //카테고리가 같은 것 끼리는 조합 불가
+        System.out.println(clothesMap);
 
+        // 경우의 수 체크 answer *= (옷 가지수 + 안 입을 경우)
+        for (int val : clothesMap.values()){ //3 1 2
+            answer *= (val+1);;
         }
 
-        return answer;
-    }
-    // 조합 메소드
-    static void comb(String[] arr, boolean[] visited, int depth, int n, int r) {
-        if (r == 0) {
-            print(arr, visited, n);
-            return;
-        }
-
-        if (depth == n) {
-            return;
-        }
-
-        visited[depth] = true;
-        comb(arr, visited, depth + 1, n, r - 1);
-
-        visited[depth] = false;
-        comb(arr, visited, depth + 1, n, r);
+        // 모두 다 안입는 경우는 존재하지 않으므로 -1
+        return answer-1;
     }
 
-    //배열 출력
-    static void print(String[] arr, boolean[] visited, int n) {
-        for (int i = 0; i < n; i++) {
-            if (visited[i]) {
-                System.out.print(arr[i] + " ");
-            }
-        }
-        System.out.println();
-    }
+
 }
