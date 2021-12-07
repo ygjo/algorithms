@@ -49,33 +49,40 @@ public class P77486 {
     }
 
     public static int[] solution(String[] enroll, String[] referral, String[] seller, int[] amount) {
-        int[] answer = {};
         int enrollCnt = enroll.length;
         int sellerCnt = seller.length;
-        Map<String ,Integer> enrollInfo = new HashMap<>();
+        int[] answer = new int[enrollCnt];
+        Map<String ,Integer> enrollIIndex = new HashMap<>();
         Map<String ,String> relation = new HashMap<>();
-        int totalProfit = 0;
+
 
         for (int i = 0; i < enrollCnt; i++) {
-            enrollInfo.put(enroll[i],i); // 판매원 순서 저장
+            enrollIIndex.put(enroll[i],i); // 판매원 순서 저장
             relation.put(enroll[i],referral[i]); // 판매원과 추천인 매핑
         }
 
         for (int j = 0; j < sellerCnt; j++) {
-            int income = amount[j]*100;
-            String sellerName = seller[j];
+            int income = amount[j]*100; // 판매가격
+            String eachSeller = seller[j]; // 셀러
 
-            if (!relation.get(sellerName).equals("-")){
+            while (!eachSeller.equals("-")){
                 int commission = income / 10; // 수수료(수입의 10%)
-                int currentIncome = income - commission;
-                System.out.println(income);
-                System.out.println(currentIncome);
-//                System.out.println(commission);
+                int profit = income - commission;
+
+                answer[enrollIIndex.get(eachSeller)] += profit;
+
+                eachSeller = relation.get(eachSeller); // 셀러의 추천인으로 이동
+                income /=10;
+
+                if (income < 1){
+                    break;
+                }
+
             }
 
         }
+        System.out.println(Arrays.toString(answer));
 
-        System.out.println(relation);
         return answer;
     }
 }
