@@ -31,7 +31,7 @@ public class P64065 {
             index++;
         }
 
-        // 내림차순 정렬(문자열 길이 기준)
+        // 오름차순 정렬(문자열 길이 기준)
         Arrays.sort(sortArrByLength, Comparator.comparingInt(String::length));
 
         for (String str : sortArrByLength){
