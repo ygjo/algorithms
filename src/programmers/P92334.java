@@ -1,8 +1,7 @@
 package programmers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class P92334 {
     public static void main(String[] args) {
@@ -15,32 +14,54 @@ public class P92334 {
         int k2 = 3;
 
         String[] id_list3 = {"con", "ryan"};
-        String[] report3 = {"ryan con", "ryan con", "con ryan", "ryan con"};
-        int k3 = 2;
+        String[] report3 = {"ryan con"};
+        int k3 = 1;
 
-        solution(id_list1,report1,k1);
+        solution(id_list3,report3,k3);
 
     }
 
     public static int[] solution(String[] id_list, String[] report, int k) {
         int idCount = id_list.length;
-
         int[] answer = new int[idCount];
-        int[] reportedCount = new int[idCount];
-        String[] reportArr = Arrays.stream(report).distinct().toArray(String[]::new); // 중복 제거
+        Map<String,Integer> ids = new HashMap<>();
+        Set<String> reportSet = new HashSet<>(Arrays.asList(report));
 
-        for(int i = 0; i <idCount ; i++){
-            String id = id_list[i];
+        List<String> reporters = new ArrayList<>();
+        List<String> reported = new ArrayList<>();
+        Map<String,Integer> reportedCount = new HashMap<>();
+        List<String > receiveEmailUser = new ArrayList<>();
 
-            for (String relation : reportArr){
-                String[]  relationArr = relation.split(" ");
-
-                if (id.equals(relationArr[1])){
-                    reportedCount[i]+=1;
-                }
-            }
+        for (int i = 0; i <idCount; i++){
+            ids.put(id_list[i],i);
         }
 
+        reportSet.forEach(str->{
+            String[] strArr = str.split(" ");
+            reporters.add(strArr[0]);
+            reported.add(strArr[1]);
+        });
+
+        for (String r : reported){
+            reportedCount.put(r, reportedCount.getOrDefault(r,0)+1);
+        }
+
+        reportedCount.keySet().forEach(key ->{
+            if (reportedCount.get(key) >= k){
+                for (int index = 0; index < reported.size(); index++){
+                    if (reported.get(index).equals(key)){
+                        receiveEmailUser.add(reporters.get(index));
+
+                    }
+
+                }
+            }
+        });
+
+        for (int i =0; i< receiveEmailUser.size(); i++){
+            int index = ids.get(receiveEmailUser.get(i));
+            answer[index]++;
+        }
 
 
         return answer;
