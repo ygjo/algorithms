@@ -1,8 +1,8 @@
 package programmers;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
+//신고 결과 받기
 public class P92334 {
     public static void main(String[] args) {
         String[] id_list1 = {"muzi", "frodo", "apeach", "neo"};
