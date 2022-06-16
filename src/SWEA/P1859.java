@@ -1,8 +1,5 @@
 package SWEA;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -43,13 +40,13 @@ import java.util.Scanner;
  2번째 케이스는 1,2일에 각각 한 개씩 사서 세 번째 날에 두 개를 팔면 10의 이익을 얻을 수 있다.
 
  input
- 3
- 3
- 10 7 6
- 3
- 3 5 9
- 5
- 1 1 3 1 2
+3
+3
+10 7 6
+3
+3 5 9
+5
+1 1 3 1 2
 
 output
  #1 0
@@ -57,38 +54,26 @@ output
  #3 5
  */
 public class P1859 {
-
-
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int count = sc.nextInt() * 2;
 
-        for (int i = 0; i<= count;i++){
-            String line = sc.nextLine();
-            if (line.isEmpty()){
-                continue;
+        Scanner sc=new Scanner(System.in);
+        int t=sc.nextInt();
+        for (int i = 0; i < t; i++) {
+            int n=sc.nextInt();
+            System.out.println(n);
+            long diff=0;
+            int max_value=0;
+            int[] arr=new int[n];
+            for (int j = 0; j < n; j++) {
+                arr[j]=sc.nextInt();
             }
-
-            if(i % 2 == 0 && i !=0){
-                String[] numArr = line.split(" ");
-                int[] cost = Arrays.stream(numArr).mapToInt(Integer :: parseInt).toArray();
-
-                int N = cost.length;
-                int max = cost[N-1];
-                int ans = 0;
-
-                for (int j = N-1; j >= 1; j--){
-                    if (cost[j] < max){
-                        ans += max - cost[j];
-                    }else{
-                        max = Math.max(cost[j], max);
-                    }
-                }
-
-                System.out.println(ans);
+            for (int j = n-1; j >=0; j--) {
+                if(arr[j]>max_value)max_value=arr[j];
+                diff+=max_value-arr[j];
             }
+            System.out.printf("#%d %d\n",i+1,diff);
         }
-
+        sc.close();
     }
 
 
