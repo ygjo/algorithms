@@ -2,7 +2,8 @@ package SWEA;
 
 import java.util.Scanner;
 
-public class addOddNumbers {
+// level 1 : 홀수 더하기
+public class P2072 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int count = sc.nextInt();
