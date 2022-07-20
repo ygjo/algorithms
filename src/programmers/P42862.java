@@ -55,6 +55,8 @@ public class P42862 {
 
         reserveList.removeAll(duplication);
         lostList.removeAll(duplication);
+        Collections.sort(reserveList);
+        Collections.sort(lostList);
 
         System.out.println("reserve : " + reserveList);
         System.out.println("lost : " + lostList);
