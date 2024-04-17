@@ -1,4 +1,4 @@
-package basic;
+package basic.selectionSort;
 
 //https://ko.khanacademy.org/computing/computer-science/algorithms/sorting-algorithms/pc/challenge-find-minimum-in-subarray
 public class indexOfMinimum {
