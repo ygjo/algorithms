@@ -3,7 +3,7 @@ package infleran;
 import java.util.Scanner;
 
 //https://cote.inflearn.com/contest/10/problem/01-03
-public class findTheLongestWord {
+public class FindTheLongestWord {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         String sentence = in.nextLine();

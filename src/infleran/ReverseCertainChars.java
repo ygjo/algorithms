@@ -15,7 +15,7 @@ import java.util.Scanner;
  *
  * a#b!GE*T@S
  */
-public class reverseCertainChars {
+public class ReverseCertainChars {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String s = input.nextLine();

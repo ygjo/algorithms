@@ -3,7 +3,7 @@ package infleran;
 import java.util.Scanner;
 
 //https://cote.inflearn.com/contest/10/problem/01-02
-public class changeCharacter {
+public class ChangeCharacter {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String target = input.next();

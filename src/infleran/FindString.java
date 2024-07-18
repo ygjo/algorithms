@@ -3,7 +3,7 @@ package infleran;
 import java.util.Scanner;
 
 //https://cote.inflearn.com/contest/10/problem/01-01
-public class findString {
+public class FindString {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         String input1 = in.next().toLowerCase();
